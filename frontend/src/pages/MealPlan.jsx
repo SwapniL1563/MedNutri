@@ -6,7 +6,7 @@ import axios from 'axios'
 import GenerateMealPlanForm from '../components/GenerateMealPlanForm'
 import { toast, ToastContainer } from 'react-toastify'
 import Header from '../components/Header'
-const BASE_URL = import.meta.env.BACKEND_URL;
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const MealPlan = () => {
   const { user , token , sidebarOpen , setSidebarOpen , mealPlan , setMealPlan , bookmarked , setBookmarked} = useContext(UserContext);
