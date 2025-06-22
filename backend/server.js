@@ -23,9 +23,10 @@ dotenv.config();
 
 // middleware
 app.use(cors({
-  origin: 'http://localhost:5173', // or wherever your frontend runs
+  origin: 'https://mednutri-frontend.vercel.app',
   credentials: true
 }));
+
 app.use(express.json());
 
 app.use("/api/auth", userRoutes);
