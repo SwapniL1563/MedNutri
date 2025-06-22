@@ -24,8 +24,13 @@ dotenv.config();
 // middleware
 app.use(cors({
   origin: 'https://mednutri-frontend.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
+
+// Preflight support
+app.options('*', cors());
 
 app.use(express.json());
 
