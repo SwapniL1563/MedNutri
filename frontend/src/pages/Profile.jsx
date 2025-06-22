@@ -109,7 +109,7 @@ const Profile = () => {
             <div className='grid frid-cols-1 md:grid-cols-2 gap-2 text-sm md:text-base'>
               <h2>Name: {user.name}</h2>
               <h2>Age: {user.age}</h2>
-              <h2>Gender: {user.age}</h2>
+              <h2>Gender: {user.gender}</h2>
               <h2>Email: {user.email}</h2>
               <h2>Country: {user.country}</h2>
             </div>
