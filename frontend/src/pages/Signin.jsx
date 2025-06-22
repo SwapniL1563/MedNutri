@@ -37,6 +37,9 @@ const Signin = () => {
     }
   }
 
+  console.log("✅ Backend URL:", import.meta.env.VITE_BACKEND_URL);
+
+
   return (
     <div className='min-h-screen bg-black w-full flex justify-center items-center gap-12 text-white relative overflow-hidden' id='signin'>
        <img src="/bg-img1-optimized.webp" alt="background-image" className="absolute right-0 top-0 h-full w-full opacity-100 z-0" />
