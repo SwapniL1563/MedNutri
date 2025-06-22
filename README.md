@@ -59,7 +59,7 @@ MedNutri AI is a full-stack AI-powered nutrition assistant that allows users to:
 ### ✅ Prescription Email Reminder
 ![Prescription Email](/frontend/public/prescription%20reminder.png)
 ### 📝 Exported Meal Plan PDF
-![PDF Export](/frontend/public/mednutri%20mealplan.pdf)
+![PDF Export](./frontend/public/mednutri%20mealplan.pdf)
 
 ---
 
