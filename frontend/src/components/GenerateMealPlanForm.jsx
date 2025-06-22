@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import { UserContext } from '../context/mednutriContext'
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
-const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+const BASE_URL = import.meta.env.VITE_BACKEND_URL
 
 const GenerateMealPlanForm = ({ onMealPlanGenerated }) => {
 
