@@ -1,4 +1,4 @@
-# MedNutri AI
+# MedNutri
 
 MedNutri AI is a full-stack AI-powered nutrition assistant that allows users to:
 - Generate personalized meal plans using Gemini AI
