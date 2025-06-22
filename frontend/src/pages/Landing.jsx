@@ -6,7 +6,7 @@ const Landing = () => {
   const navigate = useNavigate();
   const featuresRef = useRef(null);
   return (
-    <div className='w-full min-h-screen flex flex-col items-center justify-center text-gray-100 relative'>
+    <div className='w-full min-h-screen bg-black flex flex-col items-center justify-center text-gray-100 relative'>
 
      <img src="/bg-img1-optimized.webp" alt="background-image" className="absolute right-0 top-0 h-full w-full opacity-100 z-0" />
 
