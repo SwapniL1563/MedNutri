@@ -5,6 +5,7 @@ import { Menu, User } from 'lucide-react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import Header from '../components/Header';
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const Profile = () => {
    const { user,token,sidebarOpen,setSidebarOpen,prescriptions,setPrescriptions,mealPlan,setMealPlan,bookmarked,setBookmarked } = useContext(UserContext);
@@ -12,7 +13,7 @@ const Profile = () => {
      const fetchMealPlanswithFlags = async () => {
       try {
           // fetch bookmark mealplan
-          const res = await axios.get("/api/bookmarks",{
+          const res = await axios.get(`${BASE_URL}/api/bookmarks`,{
           headers:{
             Authorization:`Bearer ${token}`
           }})
@@ -21,7 +22,7 @@ const Profile = () => {
           setBookmarked(bookmarkData);
          
           // fetch all mealplan 
-          const mealplanRes = await axios.get(`/api/mealplan/fetch`,{
+          const mealplanRes = await axios.get(`${BASE_URL}/api/mealplan/fetch`,{
           headers:{
             Authorization:`Bearer ${token}`
           }
@@ -44,7 +45,7 @@ const Profile = () => {
   useEffect(() => {
   const fetchPrescriptions = async () => {
     try {
-      const res = await axios.get("/api/prescription/get", {
+      const res = await axios.get(`${BASE_URL}/api/prescription/get`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setPrescriptions(res.data);

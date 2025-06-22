@@ -9,6 +9,7 @@ import UpcomingPrescriptions from '../components/UpcomingPrescriptions.jsx';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Header from '../components/Header.jsx';
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const Prescription = () => {
   const { user,token,sidebarOpen,setSidebarOpen,prescriptions,setPrescriptions } = useContext(UserContext);
@@ -16,7 +17,7 @@ const Prescription = () => {
   useEffect(() => {
     const fetchPrescriptions = async () => {
      try {
-      const res = await axios.get("/api/prescription/get",{
+      const res = await axios.get(`${BASE_URL}/api/prescription/get`,{
       headers:{
         Authorization:`Bearer ${token}`
       }
@@ -35,7 +36,7 @@ const Prescription = () => {
 
     const handleDelete = async (id) => {
       try {
-        await axios.delete(`/api/prescription/delete/${id}`,{
+        await axios.delete(`${BASE_URL}/api/prescription/delete/${id}`,{
           headers:{
             Authorization:`Bearer ${token}`
           }

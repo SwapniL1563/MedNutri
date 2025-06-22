@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useContext, useState } from 'react'
 import { UserContext } from '../context/mednutriContext';
 import { ToastContainer, toast } from 'react-toastify';
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const SchedulePrescriptionForm = () => {
 
@@ -28,7 +29,7 @@ const SchedulePrescriptionForm = () => {
   const handleSubmit = async(e) => {
     try {
         e.preventDefault();
-        await axios.post("/api/prescription/create",
+        await axios.post(`${BASE_URL}/api/prescription/create`,
             formData,
             {
             headers: {

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+const BASE_URL = import.meta.env.BACKEND_URL;
 
 
 // creating context
@@ -16,14 +17,14 @@ export const UserContextProvider = ({ children }) => {
 
     // signin 
     const signin = async ({email,password}) => {
-       const res = await axios.post("/api/auth/signin", { email, password });
+       const res = await axios.post(`${BASE_URL}/api/auth/signin`, { email, password });
        setToken(res.data.token);
        localStorage.setItem('token',res.data.token);
     }
 
     // signup
     const signup = async (formData) => {
-        const res = await axios.post("/api/auth/signup", formData);
+        const res = await axios.post(`${BASE_URL}/api/auth/signup`, formData);
         setToken(res.data.token);
         localStorage.setItem('token',res.data.token);
     }
@@ -38,7 +39,7 @@ export const UserContextProvider = ({ children }) => {
     // if token added or changes
     useEffect(()=> {
         if(token) {
-            axios.get("/api/auth/profile",{
+            axios.get(`${BASE_URL}/api/auth/profile`,{
                 headers:{ Authorization:`Bearer ${token}`},
             }).then((res) => setUser(res.data))
             .catch(()=> {

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../context/mednutriContext'
 import axios from 'axios';
 import { toast } from 'react-toastify';
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const UpcomingPrescriptions = () => {
     const { token } = useContext(UserContext);
@@ -10,7 +11,7 @@ const UpcomingPrescriptions = () => {
     useEffect(()=> {
         const fetchPrescriptions = async() => {
         try {
-            const res = await axios.get("/api/prescription/get", {
+            const res = await axios.get(`${BASE_URL}/api/prescription/get`, {
                 headers:{ 
                     Authorization:`Bearer ${token}`
                 }

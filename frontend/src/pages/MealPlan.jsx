@@ -6,6 +6,7 @@ import axios from 'axios'
 import GenerateMealPlanForm from '../components/GenerateMealPlanForm'
 import { toast, ToastContainer } from 'react-toastify'
 import Header from '../components/Header'
+const BASE_URL = import.meta.env.BACKEND_URL;
 
 const MealPlan = () => {
   const { user , token , sidebarOpen , setSidebarOpen , mealPlan , setMealPlan , bookmarked , setBookmarked} = useContext(UserContext);
@@ -13,7 +14,7 @@ const MealPlan = () => {
     const fetchMealPlanswithFlags = async () => {
       try {
           // fetch bookmark mealplan
-          const res = await axios.get("/api/bookmarks",{
+          const res = await axios.get(`${BASE_URL}/api/bookmarks`,{
           headers:{
             Authorization:`Bearer ${token}`
           }})
@@ -22,7 +23,7 @@ const MealPlan = () => {
           setBookmarked(bookmarkData);
          
           // fetch all mealplan 
-          const mealplanRes = await axios.get(`/api/mealplan/fetch`,{
+          const mealplanRes = await axios.get(`${BASE_URL}/api/mealplan/fetch`,{
           headers:{
             Authorization:`Bearer ${token}`
           }
@@ -45,7 +46,7 @@ const MealPlan = () => {
 
     const handleDelete = async(id) => {
       try {
-        await axios.delete(`/api/mealplan/delete/${id}`,{
+        await axios.delete(`${BASE_URL}/api/mealplan/delete/${id}`,{
           headers:{
             Authorization:`Bearer ${token}`
           }
@@ -64,7 +65,7 @@ const MealPlan = () => {
 
     const handleExportToPDF = async (id) => {
       try {
-        const url =  `/api/mealplan/${id}/pdf?token=${token}`
+        const url =  `${BASE_URL}/api/mealplan/${id}/pdf?token=${token}`
         window.open(url,"_blank") 
       } catch (error) {
         toast.error("Error exporting to PDF",{
@@ -76,7 +77,7 @@ const MealPlan = () => {
     const toggleBookmark = async (id,isBookmarked) => {
       try {
         if(isBookmarked){
-          await axios.delete(`/api/bookmark/${id}`,{
+          await axios.delete(`${BASE_URL}/api/bookmark/${id}`,{
             headers:{
               Authorization:`Bearer ${token}`
             }
@@ -85,7 +86,7 @@ const MealPlan = () => {
             autoClose:1000,className: "bg-[#0F0F0F] text-[#3bd470]", 
             });
           } else {
-          await axios.post(`/api/bookmark/${id}`,{},{
+          await axios.post(`${BASE_URL}/api/bookmark/${id}`,{},{
             headers:{
               Authorization:`Bearer ${token}`
             }

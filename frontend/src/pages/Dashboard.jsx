@@ -7,6 +7,8 @@ import UpcomingPrescriptions from '../components/UpcomingPrescriptions.jsx';
 import MealMacroPieChart from '../components/MealMacroPieChart.jsx';
 import LatestMealPlan from '../components/LatestMealPlan.jsx';
 import Header from '../components/Header.jsx';
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 
 const Dashboard = () => {
 
@@ -16,7 +18,7 @@ const Dashboard = () => {
 
   useEffect(()=>{
         const fetchMealPlans = async() => {
-          const res = await axios.get("/api/mealplan/fetch",{
+          const res = await axios.get(`${BASE_URL}/api/mealplan/fetch`,{
           headers: {  Authorization: `Bearer ${token}`,
          },
         });
