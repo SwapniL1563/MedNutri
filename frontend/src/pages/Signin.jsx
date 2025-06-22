@@ -26,6 +26,7 @@ const Signin = () => {
     const { email,password } = formData
     try {
         await signin({email,password});
+         console.log("✅ Backend URL:", import.meta.env.VITE_BACKEND_URL);
         navigate("/dashboard");
         toast("Signin successfully!",{
           autoClose:1000,className: "bg-[#0F0F0F] text-[#3bd470]", 
@@ -37,7 +38,7 @@ const Signin = () => {
     }
   }
 
-  console.log("✅ Backend URL:", import.meta.env.VITE_BACKEND_URL);
+ 
 
 
   return (
