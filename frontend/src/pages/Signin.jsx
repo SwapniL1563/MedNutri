@@ -35,6 +35,7 @@ const Signin = () => {
           toast.error("Invalid Credentials!",{
           autoClose:1000,className: "bg-[#0F0F0F] text-[#3bd470]", 
          })
+          console.log("✅ Backend URL:", import.meta.env.VITE_BACKEND_URL);
     }
   }
 
