@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
-const BASE_URL = import.meta.env.BACKEND_URL;
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 
 // creating context
