@@ -1,7 +1,14 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 const Landing = () => {
+  
+  // to prevent cold start of backend as it is running on render 
+  useEffect(() => {
+  fetch("https://mednutri-backend.onrender.com/")
+    .then(() => console.log("Warming up backend"));
+   }, []);
+
   
   const navigate = useNavigate();
   const featuresRef = useRef(null);
