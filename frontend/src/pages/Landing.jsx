@@ -30,7 +30,7 @@ const Landing = () => {
         <Link to="/signup" className='text-gray-400 hover:text-gray-100'>Start Journey</Link>
         </div>
 
-        <button onClick={() => navigate("/signup")} className='bg-[#3bd470] hover:bg-[#34bf63] px-3 h-8 text-xs md:text-sm  outline-none  text-[#171717]  font-medium rounded'>Get Started</button>
+        <button onClick={() => navigate("/signin")} className='bg-[#3bd470] hover:bg-[#34bf63] px-3 h-8 text-xs md:text-sm  outline-none  text-[#171717]  font-medium rounded'>Get Started</button>
         </nav>
 
         <div className='w-full flex flex-col relative'>
@@ -38,8 +38,8 @@ const Landing = () => {
                 <h2 className='font-medium text-4xl md:text-7xl w-full md:w-[65%] text-center'>Your Complete <span className='text-[#3bd470] italic  font-[400]'>Health</span> Assistant</h2>
                 <p className='text-sm md:text-base md:w-1/2 text text-center text-gray-400'>AI-generated meal plans, smart prescription reminders and personalized insights to keep your wellness effortlessly.</p>
                 <div className="flex gap-2">
-                   <button onClick={() => navigate("/signup")} className='bg-[#3bd470] hover:bg-[#34bf63] px-5 md:px-7 h-9 md:h-10 text-sm md:text-base outline-none  text-[#171717]  font-medium rounded'>Get Started</button>
-                   <button onClick={() => navigate("/signin")} className='bg-black/20 hover:bg-black/40 border border-gray-400 px-5 md:px-7 h-9 md:h-10 text-sm md:text-base  outline-none  text-gray-100 font-medium rounded text-'>Dashboard</button>
+                   <button onClick={() => navigate("/signin")} className='bg-[#3bd470] hover:bg-[#34bf63] px-5 md:px-7 h-9 md:h-10 text-sm md:text-base outline-none  text-[#171717]  font-medium rounded'>Get Started</button>
+                   <button onClick={() => navigate("/signup")} className='bg-black/20 hover:bg-black/40 border border-gray-400 px-5 md:px-7 h-9 md:h-10 text-sm md:text-base  outline-none  text-gray-100 font-medium rounded text-'>Start the Journey</button>
                 </div>
             </div>
 
