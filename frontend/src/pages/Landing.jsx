@@ -39,7 +39,7 @@ const Landing = () => {
                 <p className='text-sm md:text-base md:w-1/2 text text-center text-gray-400'>AI-generated meal plans, smart prescription reminders and personalized insights to keep your wellness effortlessly.</p>
                 <div className="flex gap-2">
                    <button onClick={() => navigate("/signin")} className='bg-[#3bd470] hover:bg-[#34bf63] px-5 md:px-7 h-9 md:h-10 text-sm md:text-base outline-none  text-[#171717]  font-medium rounded'>Get Started</button>
-                   <button onClick={() => navigate("/signup")} className='bg-black/20 hover:bg-black/40 border border-gray-400 px-5 md:px-7 h-9 md:h-10 text-sm md:text-base  outline-none  text-gray-100 font-medium rounded text-'>Start the Journey</button>
+                   <button onClick={() => navigate("/signup")} className='bg-black/20 hover:bg-black/40 border border-gray-400 px-5 md:px-7 h-9 md:h-10 text-sm md:text-base  outline-none  text-gray-100 font-medium rounded text-'>Create new account</button>
                 </div>
             </div>
 
