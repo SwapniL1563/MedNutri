@@ -92,6 +92,10 @@ npm run dev
 
 ## 🌐 Live Demo
 
-- Frontend: [mednutri-frontend.vercel.app](https://mednutri-frontend.vercel.app)
-- Backend: [mednutri-backend.onrender.com](https://mednutri-backend.onrender.com)
+- Go live: [mednutri-frontend.vercel.app](https://mednutri-frontend.vercel.app)
 
+## 🔑 Demo credentials
+- Email: admin@gmail.com
+- Password: admin123
+  
+---
