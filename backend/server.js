@@ -6,6 +6,7 @@ import userRoutes from "./routes/userRoutes.js"
 import prescriptionRoutes from "./routes/prescriptionRoutes.js"
 import mealplanRoutes from "./routes/mealplanRoutes.js"
 import bookMarkRoutes from "./routes/bookMarkRoutes.js"
+import cookieParser from 'cookie-parser'
 import { scheduledAllReminders } from "./utils/reminderCron.js";
 
 const PORT = 3000;
@@ -23,6 +24,7 @@ app.use(cors({
 
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use("/api/auth", userRoutes);
 app.use("/api/prescription",prescriptionRoutes);
