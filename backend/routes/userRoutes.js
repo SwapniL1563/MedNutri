@@ -7,7 +7,7 @@ const router = express.Router();
 router.post("/signup",signup);
 router.post("/signin",sigin);
 router.get("/profile",authMiddleware,getUserData);
-router.get('/refresh-token',refreshAccessToken)
+router.get("/refresh-token",refreshAccessToken)
 
 //protected routes
 router.get("/dashboard",authMiddleware,async(req,res)=> {

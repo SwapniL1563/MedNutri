@@ -20,18 +20,13 @@ app.use(cors({
   credentials: true,
 }));
 
-app.options('*', cors({
-  origin: 'https://mednutri-frontend.vercel.app',
-  credentials: true,
-}));
-
 app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api/auth", userRoutes);
 app.use("/api/prescription",prescriptionRoutes);
 app.use("/api/mealplan",mealplanRoutes);
-app.use("/api",bookMarkRoutes);
+app.use("/api/bookmarks",bookMarkRoutes);
 
 // server started
 app.get("/",function(req,res){
