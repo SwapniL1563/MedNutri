@@ -29,7 +29,7 @@ export const scheduledAllReminders = async () => {
         const consent = prescription.user?.consent ?? true;
 
         if (email && consent) {
-          const subject = "⏰ MedNutri Reminder";
+        const subject = "⏰ MedNutri Reminder";
 
         const text = `Hi, Reminder to take: ${prescription.medications} Dosage: ${prescription.dosage || 'As directed'} Notes: ${prescription.notes || 'None'} Stay Healthy! 💚`;
 

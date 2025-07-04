@@ -3,6 +3,14 @@ import bcrypt from 'bcrypt'
 import validator from 'validator';
 import User  from '../models/userModel.js';
 
+const generateAccessToken = (id) => {
+    return jwt.sign({id:newUser._id},process.env.JWT_SECRET, { expiresIn:"15m" });
+}
+
+const generateRefreshToken = (id) => {
+    return jwt.sign({id:newUser._id},process.env.JWT_REFRESH_SECRET, { expiresIn:"7d" });
+}
+
 // signup logic 
 export const signup = async(req,res) => {
     try {
@@ -39,9 +47,19 @@ export const signup = async(req,res) => {
         name,email,password:hashpwd,age,gender,country,allergies,preferences,consent
     }) 
 
-    // now generate jwt token for logged in user
-    const token = jwt.sign({id:newUser._id},process.env.JWT_SECRET, { expiresIn:"7d" });
-    res.status(201).json({token, "msg" : "New user created successfully "});
+    // now generate both jwt access token and refresh token for logged in user
+    const accessToken = generateAccessToken(newUser._id);
+    const refreshToken = generateRefreshToken(newUser._id);
+
+    // store the refresh token in http-only cookies
+    res.cookie('refreshToken',refreshToken,{
+        httpOnly:true,
+        secure:true,
+        sameSite:'Strict',
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+    })
+
+    res.status(201).json({token:accessToken, "msg" : "New user created successfully "});
     } catch (error) {
         console.error("Error Signup: ",error.message)
     }
@@ -71,9 +89,19 @@ export const sigin = async(req,res) => {
         })
     }
 
-    // if both pwd matches then generate jwt token for same user
-    const token = jwt.sign({id:user._id},process.env.JWT_SECRET,{ expiresIn:"7d" });
-    res.status(200).json({token, "msg" : "User Logged in  successfully "});
+     // now generate both jwt access token and refresh token for logged in user
+    const accessToken = generateAccessToken(newUser._id);
+    const refreshToken = generateRefreshToken(newUser._id);
+
+    // store the refresh token in http-only cookies
+    res.cookie('refreshToken',refreshToken,{
+        httpOnly:true,
+        secure:true,
+        sameSite:'Strict',
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+    })
+
+    res.status(200).json({token:accessToken, "msg" : "User Logged in  successfully "});
     } catch (error) {
        console.error("Signin Error: ",error.message) 
     }
@@ -93,6 +121,25 @@ export const getUserData = async (req,res) => {
             "message":"Unable to fetch User data", error:error.message
         })
      }
+}
+
+// refreshAccessToken logic
+export const refreshAccessToken = ( req,res) => {
+    // get the refresh token from cookie
+    const token = req.cookies.refreshToken;
+
+    if(!token) {
+        return res.status(401).json({ error: "No refresh token provided"})
+    }
+
+    try{
+        const decoded = jwt.verify(token,process.env.JWT_REFRESH_SECRET);
+        // if verified then generate new access token
+        const accessToken = generateAccessToken(decoded.id);
+        res.json({ token: accessToken });
+    } catch(error){
+        res.status(403).json({ error: "Invalid refresh token"});
+    }
 }
 
 
