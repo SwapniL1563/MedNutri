@@ -45,10 +45,15 @@ app.get("/",function(req,res){
   res.send("Server is Working!")
 });
 
+// console.log(app._router.stack.map(r => r.route?.path || r.name || 'middleware'));
+
+
 const startServer = async(req,res) => {
   try {
       await connectDb(); // connect to DB
-      await scheduledAllReminders(); // schedule the prescription reminders 
+      await scheduledAllReminders(); // schedule the prescription reminders
+      console.log(app._router.stack.map(r => r.route?.path || r.name || 'middleware'));
+ 
       app.listen(PORT , () => {
       console.log(`Server is running on ${PORT} `);
       })
