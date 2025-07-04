@@ -24,7 +24,7 @@ const corsOptions = {
 
 
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
+// app.options("*", cors(corsOptions));
 
 app.use(express.json());
 app.use(cookieParser());
@@ -52,7 +52,7 @@ const startServer = async(req,res) => {
   try {
       await connectDb(); // connect to DB
       await scheduledAllReminders(); // schedule the prescription reminders
-      console.log(app._router.stack.map(r => r.route?.path || r.name || 'middleware'));
+      // console.log(app._router.stack.map(r => r.route?.path || r.name || 'middleware'));
  
       app.listen(PORT , () => {
       console.log(`Server is running on ${PORT} `);
