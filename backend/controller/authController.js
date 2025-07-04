@@ -4,11 +4,11 @@ import validator from 'validator';
 import User  from '../models/userModel.js';
 
 const generateAccessToken = (id) => {
-    return jwt.sign({id:newUser._id},process.env.JWT_SECRET, { expiresIn:"15m" });
+    return jwt.sign({ id },process.env.JWT_SECRET, { expiresIn:"15m" });
 }
 
 const generateRefreshToken = (id) => {
-    return jwt.sign({id:newUser._id},process.env.JWT_REFRESH_SECRET, { expiresIn:"7d" });
+    return jwt.sign({ id },process.env.JWT_REFRESH_SECRET, { expiresIn:"7d" });
 }
 
 // signup logic 
