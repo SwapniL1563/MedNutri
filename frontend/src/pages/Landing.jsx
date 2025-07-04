@@ -6,7 +6,7 @@ const Landing = () => {
   // to prevent cold start of backend as it is running on render 
   useEffect(() => {
   fetch("https://mednutri-backend.onrender.com/")
-    .then(() => console.log("Warming up backend"));
+    .then();
    }, []);
 
   
