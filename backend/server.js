@@ -16,9 +16,7 @@ const app = express();
 
 // middleware
 app.use(cors({
-  origin: ['https://mednutri-frontend.vercel.app'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  origin: 'https://mednutri-frontend.vercel.app',
   credentials: true
 }));
 
