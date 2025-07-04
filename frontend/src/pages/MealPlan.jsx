@@ -6,6 +6,7 @@ import axios from 'axios'
 import GenerateMealPlanForm from '../components/GenerateMealPlanForm'
 import { toast, ToastContainer } from 'react-toastify'
 import Header from '../components/Header'
+import axiosInstance from '../utils/axiosInstance'
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const MealPlan = () => {
@@ -14,20 +15,13 @@ const MealPlan = () => {
     const fetchMealPlanswithFlags = async () => {
       try {
           // fetch bookmark mealplan
-          const res = await axios.get(`${BASE_URL}/api/bookmarks`,{
-          headers:{
-            Authorization:`Bearer ${token}`
-          }})
+          const res = await axiosInstance.get('/api/bookmarks')
 
           const bookmarkData = Array.isArray(res.data) ? res.data : [];
           setBookmarked(bookmarkData);
          
           // fetch all mealplan 
-          const mealplanRes = await axios.get(`${BASE_URL}/api/mealplan/fetch`,{
-          headers:{
-            Authorization:`Bearer ${token}`
-          }
-          });
+          const mealplanRes = await axiosInstance.get('/api/mealplan/fetch');
 
           // now add isBookmarked flag
           const mealplanWithFlag = mealplanRes.data.map((plan) => {
@@ -46,11 +40,7 @@ const MealPlan = () => {
 
     const handleDelete = async(id) => {
       try {
-        await axios.delete(`${BASE_URL}/api/mealplan/delete/${id}`,{
-          headers:{
-            Authorization:`Bearer ${token}`
-          }
-        })
+        await axiosInstance.delete(`/api/mealplan/delete/${id}`)
           toast("Deleted mealplan successfully!",{
             autoClose:1000,className: "bg-[#0F0F0F] text-[#3bd470]", 
           });
@@ -77,20 +67,12 @@ const MealPlan = () => {
     const toggleBookmark = async (id,isBookmarked) => {
       try {
         if(isBookmarked){
-          await axios.delete(`${BASE_URL}/api/bookmark/${id}`,{
-            headers:{
-              Authorization:`Bearer ${token}`
-            }
-          });
+          await axiosInstance.delete(`/api/bookmark/${id}`);
             toast("Removed Bookmark Successfully!",{
             autoClose:1000,className: "bg-[#0F0F0F] text-[#3bd470]", 
             });
           } else {
-          await axios.post(`${BASE_URL}/api/bookmark/${id}`,{},{
-            headers:{
-              Authorization:`Bearer ${token}`
-            }
-          });
+          await axiosInstance.post(`/api/bookmark/${id}`,{});
             toast("Bookmarked Successfully!",{
             autoClose:1000,className: "bg-[#0F0F0F] text-[#3bd470]", 
             });

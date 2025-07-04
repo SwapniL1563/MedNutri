@@ -9,6 +9,7 @@ import UpcomingPrescriptions from '../components/UpcomingPrescriptions.jsx';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Header from '../components/Header.jsx';
+import axiosInstance from '../utils/axiosInstance.jsx';
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const Prescription = () => {
@@ -17,11 +18,7 @@ const Prescription = () => {
   useEffect(() => {
     const fetchPrescriptions = async () => {
      try {
-      const res = await axios.get(`${BASE_URL}/api/prescription/get`,{
-      headers:{
-        Authorization:`Bearer ${token}`
-      }
-     })
+      const res = await axiosInstance.get('/api/prescription/get')
       setPrescriptions(res.data);
     }
      catch(error) {
@@ -36,11 +33,7 @@ const Prescription = () => {
 
     const handleDelete = async (id) => {
       try {
-        await axios.delete(`${BASE_URL}/api/prescription/delete/${id}`,{
-          headers:{
-            Authorization:`Bearer ${token}`
-          }
-        });
+        await axiosInstance.delete(`/api/prescription/delete/${id}`);
 
         toast("Deleted prescription successfully!",{
           autoClose:1000,className: "bg-[#0F0F0F] text-[#3bd470]", 

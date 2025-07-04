@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useContext, useState } from 'react'
 import { UserContext } from '../context/mednutriContext';
 import { ToastContainer, toast } from 'react-toastify';
+import axiosInstance from '../utils/axiosInstance';
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const SchedulePrescriptionForm = () => {
@@ -29,13 +30,7 @@ const SchedulePrescriptionForm = () => {
   const handleSubmit = async(e) => {
     try {
         e.preventDefault();
-        await axios.post(`${BASE_URL}/api/prescription/create`,
-            formData,
-            {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
+        await axiosInstance.post('/api/prescription/create',formData);
         toast('Scheduled presciption successfully!',{
           autoClose:1000,className: "bg-[#0F0F0F] text-[#3bd470]", 
         });

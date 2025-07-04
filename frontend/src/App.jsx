@@ -16,7 +16,7 @@ function App() {
 
   // protected routes
   const ProtectedRoutes = ({ children }) => {
-    const { token }= useContext(UserContext);
+    const { token } = useContext(UserContext);
     return token ? children : <Navigate to="/signin" />
   }
 

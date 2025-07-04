@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
 import { createContext, useEffect, useState } from "react";
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -8,8 +8,8 @@ export const UserContext = createContext();
 
 // creating global states and passing them to children
 export const UserContextProvider = ({ children }) => {
-    const [user,setUser] = useState(null);
-    const [token,setToken] = useState(localStorage.getItem('token') || '');
+    const [ user,setUser ] = useState(null);
+    const [ token,setToken ] = useState(localStorage.getItem('token') || '');
     const [ sidebarOpen , setSidebarOpen ] = useState(false);
     const [ prescriptions,setPrescriptions ] = useState([]);
     const [ mealPlan,setMealPlan ] = useState([]);
@@ -17,14 +17,14 @@ export const UserContextProvider = ({ children }) => {
 
     // signin 
     const signin = async ({email,password}) => {
-       const res = await axios.post(`${BASE_URL}/api/auth/signin`, { email, password });
+       const res = await axiosInstance.post('/api/auth/signin', { email, password });
        setToken(res.data.token);
        localStorage.setItem('token',res.data.token);
     }
 
     // signup
     const signup = async (formData) => {
-        const res = await axios.post(`${BASE_URL}/api/auth/signup`, formData);
+        const res = await axiosInstance.post('/api/auth/signup', formData);
         setToken(res.data.token);
         localStorage.setItem('token',res.data.token);
     }
@@ -39,9 +39,8 @@ export const UserContextProvider = ({ children }) => {
     // if token added or changes
     useEffect(()=> {
         if(token) {
-            axios.get(`${BASE_URL}/api/auth/profile`,{
-                headers:{ Authorization:`Bearer ${token}`},
-            }).then((res) => setUser(res.data))
+            axiosInstance.get('/api/auth/profile')
+            .then((res) => setUser(res.data))
             .catch(()=> {
                 setUser(null);
                 setToken('');

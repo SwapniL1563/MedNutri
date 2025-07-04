@@ -5,6 +5,7 @@ import { Menu, User } from 'lucide-react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import Header from '../components/Header';
+import axiosInstance from '../utils/axiosInstance';
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const Profile = () => {
@@ -13,20 +14,13 @@ const Profile = () => {
      const fetchMealPlanswithFlags = async () => {
       try {
           // fetch bookmark mealplan
-          const res = await axios.get(`${BASE_URL}/api/bookmarks`,{
-          headers:{
-            Authorization:`Bearer ${token}`
-          }})
+          const res = await axiosInstance.get('/api/bookmarks')
 
           const bookmarkData = Array.isArray(res.data) ? res.data : [];
           setBookmarked(bookmarkData);
          
           // fetch all mealplan 
-          const mealplanRes = await axios.get(`${BASE_URL}/api/mealplan/fetch`,{
-          headers:{
-            Authorization:`Bearer ${token}`
-          }
-          });
+          const mealplanRes = await axiosInstance.get('/api/mealplan/fetch');
 
           // now add isBookmarked flag
           const mealplanWithFlag = mealplanRes.data.map((plan) => {
@@ -45,9 +39,7 @@ const Profile = () => {
   useEffect(() => {
   const fetchPrescriptions = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/api/prescription/get`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await axiosInstance.get('/api/prescription/get');
       setPrescriptions(res.data);
     } catch (err) {
       toast.error("Error fetching prescriptions",{

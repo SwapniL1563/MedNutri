@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import { UserContext } from '../context/mednutriContext'
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
+import axiosInstance from '../utils/axiosInstance';
 const BASE_URL = import.meta.env.VITE_BACKEND_URL
 
 const GenerateMealPlanForm = ({ onMealPlanGenerated }) => {
@@ -31,12 +32,7 @@ const GenerateMealPlanForm = ({ onMealPlanGenerated }) => {
          preferences:formData.preferences.split(","),
          allergies:formData.allergies.split(",")
        }
-        await axios.post(`${BASE_URL}/api/mealplan/create`,
-        data, {
-            headers:{
-                Authorization:`Bearer ${token}`
-            }
-        });
+        await axiosInstance.post('/api/mealplan/create', data);
         
         // refresh the fetch meal plan
         if(onMealPlanGenerated) { 
