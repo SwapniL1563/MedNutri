@@ -67,12 +67,12 @@ const MealPlan = () => {
     const toggleBookmark = async (id,isBookmarked) => {
       try {
         if(isBookmarked){
-          await axiosInstance.delete(`/api/bookmark/${id}`);
+          await axiosInstance.delete(`/api/bookmarks/${id}`);
             toast("Removed Bookmark Successfully!",{
             autoClose:1000,className: "bg-[#0F0F0F] text-[#3bd470]", 
             });
           } else {
-          await axiosInstance.post(`/api/bookmark/${id}`,{});
+          await axiosInstance.post(`/api/bookmarks/${id}`,{});
             toast("Bookmarked Successfully!",{
             autoClose:1000,className: "bg-[#0F0F0F] text-[#3bd470]", 
             });
