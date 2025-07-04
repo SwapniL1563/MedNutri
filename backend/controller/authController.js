@@ -90,8 +90,8 @@ export const sigin = async(req,res) => {
     }
 
      // now generate both jwt access token and refresh token for logged in user
-    const accessToken = generateAccessToken(newUser._id);
-    const refreshToken = generateRefreshToken(newUser._id);
+    const accessToken = generateAccessToken(user._id);
+    const refreshToken = generateRefreshToken(user._id);
 
     // store the refresh token in http-only cookies
     res.cookie('refreshToken',refreshToken,{
