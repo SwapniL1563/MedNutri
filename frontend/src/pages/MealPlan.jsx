@@ -210,7 +210,7 @@ const MealPlan = () => {
           <button
             onClick={handlePrev}
             disabled={currentPage === 1}
-            className="px-3 py-1 bg-gray-700 text-white rounded disabled:opacity-50"
+            className="px-3 py-1 bg-[#0F0F0F] text-white rounded disabled:opacity-50"
           >
             Prev
           </button>
@@ -218,7 +218,7 @@ const MealPlan = () => {
           <button
             onClick={handleNext}
             disabled={currentPage === totalPages}
-            className="px-3 py-1 bg-gray-700 text-white rounded disabled:opacity-50"
+            className="px-3 py-1 bg-[#0F0F0F] text-white rounded disabled:opacity-50"
           >
             Next
           </button>
