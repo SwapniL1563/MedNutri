@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../context/mednutriContext'
 import { Bookmark, FileText, Menu, Trash2, User } from 'lucide-react'
 import Sidebar from '../components/Sidebar'
@@ -11,6 +11,22 @@ const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const MealPlan = () => {
   const { user , token , sidebarOpen , setSidebarOpen , mealPlan , setMealPlan , bookmarked , setBookmarked} = useContext(UserContext);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 2; 
+
+  const indexOfLast = currentPage * itemsPerPage;
+  const indexOfFirst = indexOfLast - itemsPerPage;
+  const currentMealPlans = mealPlan.slice(indexOfFirst, indexOfLast);
+
+  const totalPages = Math.ceil(mealPlan.length / itemsPerPage);
+
+  const handlePrev = () => {
+    if (currentPage > 1) setCurrentPage(prev => prev - 1);
+  };
+
+  const handleNext = () => {
+    if (currentPage < totalPages) setCurrentPage(prev => prev + 1);
+  };
 
     const fetchMealPlanswithFlags = async () => {
       try {
@@ -142,10 +158,10 @@ const MealPlan = () => {
 
          {/* MealPlans Card */}
          <div className='text-gray-100 grid grid-cols-1 md:grid-cols-2 gap-2'>
-          { mealPlan.length === 0 ? ( <div>
+          { currentMealPlans.length === 0 ? ( <div>
             <h2>No MealPlan Found</h2>
           </div>) : (
-             mealPlan.map((item) => {
+             currentMealPlans.map((item) => {
                 const parsed = parseMealPlan(item.plan)
 
                 return (
@@ -188,6 +204,26 @@ const MealPlan = () => {
           )
           }
          </div>
+
+         {mealPlan.length > itemsPerPage && (
+         <div className="flex justify-center items-center gap-4 mt-4">
+          <button
+            onClick={handlePrev}
+            disabled={currentPage === 1}
+            className="px-3 py-1 bg-gray-700 text-white rounded disabled:opacity-50"
+          >
+            Prev
+          </button>
+          <span className="text-white">{currentPage} / {totalPages}</span>
+          <button
+            onClick={handleNext}
+            disabled={currentPage === totalPages}
+            className="px-3 py-1 bg-gray-700 text-white rounded disabled:opacity-50"
+          >
+            Next
+          </button>
+        </div>
+        )}
          
          <h1 className='text-gray-100 text-lg md:text-xl font-medium md:px-0 y-2 md:py-0'>BookMarked <span className='text-[#3bd470]'>MealPlans</span></h1>
 
